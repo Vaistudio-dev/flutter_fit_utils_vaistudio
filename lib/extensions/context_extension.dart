@@ -8,4 +8,9 @@ extension VaiStudioContextxtension on BuildContext {
   FCMProvider get fcm => read<FCMProvider>();
   /// Accès au module FCM.
   FCMProvider get watchFcm => watch<FCMProvider>();
+
+  /// Accès au build.
+  BuildProvider get build => read<BuildProvider>();
+  /// Accès au build.
+  BuildProvider get watchBuild => watch<BuildProvider>();
 }
