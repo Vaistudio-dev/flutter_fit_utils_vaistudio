@@ -5,6 +5,7 @@ import 'config/ui_config.dart';
 
 export 'config/index.dart';
 export 'extensions/index.dart';
+export 'fcm_provider.dart';
 
 /// Initializes the following configs:
 /// - UIConfig
