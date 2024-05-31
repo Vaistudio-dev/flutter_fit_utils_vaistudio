@@ -12,7 +12,8 @@ class DeveloperConfig extends RemoteConfig {
   }
 
   /// Returns [true] if the current's user email is in the developper list.
-  bool isDevelopper() => _developerList.contains(FirebaseAuth.instance.currentUser?.email?.toLowerCase() ?? "");
+  bool isDevelopper() => _developerList
+      .contains(FirebaseAuth.instance.currentUser?.email?.toLowerCase() ?? "");
 }
 
 final DeveloperConfig devConfig = DeveloperConfig();

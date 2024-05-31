@@ -14,17 +14,23 @@ class UpdateHandler extends StatelessWidget {
   final Widget? onMandatoryUpdate;
 
   /// Widget qui gère les mises à jour de l'application.
-  const UpdateHandler({super.key, required this.child, this.onMandatoryUpdate, this.onOptionnalUpdate});
+  const UpdateHandler(
+      {super.key,
+      required this.child,
+      this.onMandatoryUpdate,
+      this.onOptionnalUpdate});
 
   @override
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        if (context.watchBuild.appUpdateStatus == UpdateStatus.optionnal && onOptionnalUpdate != null) {
+        if (context.watchBuild.appUpdateStatus == UpdateStatus.optionnal &&
+            onOptionnalUpdate != null) {
           return onMandatoryUpdate!;
         }
 
-        if (context.watchBuild.appUpdateStatus == UpdateStatus.mandatory && onMandatoryUpdate != null) {
+        if (context.watchBuild.appUpdateStatus == UpdateStatus.mandatory &&
+            onMandatoryUpdate != null) {
           return onMandatoryUpdate!;
         }
 

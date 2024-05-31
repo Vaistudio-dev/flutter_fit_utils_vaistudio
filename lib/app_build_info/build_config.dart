@@ -18,9 +18,11 @@ class BuildConfig extends RemoteConfig {
 
   @override
   void read() {
-    latestBuildInformation = BuildVersion.fromModel(Model.fromJson(jsonDecode(appConfig.getString(versionKey)) as Map<String, dynamic>));
+    latestBuildInformation = BuildVersion.fromModel(Model.fromJson(
+        jsonDecode(appConfig.getString(versionKey)) as Map<String, dynamic>));
   }
 
+  /// Reads the current app version on the device and sends the data to the [BuildProvider].
   Future<void> getCurrentVersion(BuildProvider buildProvider) async {
     final PackageInfo package = await PackageInfo.fromPlatform();
     buildProvider.currentAppVersion = package.version;

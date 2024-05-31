@@ -15,13 +15,15 @@ class UIConfig extends RemoteConfig {
 
   @override
   void read() {
-    _appText = Map<String, String>.from(jsonDecode(appConfig.getString(_localeKey)) as Map<dynamic, dynamic>);
+    _appText = Map<String, String>.from(
+        jsonDecode(appConfig.getString(_localeKey)) as Map<dynamic, dynamic>);
     showAppBar = appConfig.getBool(_showAppBarKey);
     maxLoadingTries = appConfig.getInt(_loadingTriesKey);
   }
 
   /// Retourne un [String] de [appText].
-  String getString(String key, {Map<String, String>? placeholders, String? replacementIfNotFound}) {
+  String getString(String key,
+      {Map<String, String>? placeholders, String? replacementIfNotFound}) {
     String result = _appText[key] ?? key;
 
     if (result == key && replacementIfNotFound != null) {
@@ -42,4 +44,8 @@ class UIConfig extends RemoteConfig {
 final UIConfig uiConfig = UIConfig();
 
 /// Returns a localized [String] for the UI.
-String getString(String key, {Map<String, String>? placeholders, String? replacementIfNotFound}) => uiConfig.getString(key, placeholders: placeholders, replacementIfNotFound: replacementIfNotFound);
+String getString(String key,
+        {Map<String, String>? placeholders, String? replacementIfNotFound}) =>
+    uiConfig.getString(key,
+        placeholders: placeholders,
+        replacementIfNotFound: replacementIfNotFound);

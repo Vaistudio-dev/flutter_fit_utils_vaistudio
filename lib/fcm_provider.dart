@@ -13,7 +13,10 @@ class FCMProvider extends ChangeNotifier {
   /// [token]: le token FCM de l'utilisateur.
   /// [onMessage]: callback a appelé lorsqu'on recoit un message.
   /// [onUpdateToken]: callback a appelé si [token] est différent du token du module.
-  Future<void> initialize({required String token, required Future<void> Function(RemoteMessage) onMessage, required Function(String) onUpdateToken}) async {
+  Future<void> initialize(
+      {required String token,
+      required Future<void> Function(RemoteMessage) onMessage,
+      required Function(String) onUpdateToken}) async {
     await _fcm.requestPermission();
 
     final String? fcmToken = await _fcm.getToken();
@@ -24,8 +27,10 @@ class FCMProvider extends ChangeNotifier {
     await _initializePushNotifications(onMessage);
   }
 
-  Future<void> _initializePushNotifications(Future<void> Function(RemoteMessage) onMessage) async {
-    await _fcm.setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
+  Future<void> _initializePushNotifications(
+      Future<void> Function(RemoteMessage) onMessage) async {
+    await _fcm.setForegroundNotificationPresentationOptions(
+        alert: true, badge: true, sound: true);
     _fcm.getInitialMessage().then(_handleMessage);
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
     FirebaseMessaging.onBackgroundMessage(onMessage);
