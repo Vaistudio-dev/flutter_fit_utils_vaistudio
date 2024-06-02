@@ -15,8 +15,18 @@ This package offers:
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+- [Configure your machine to use a private repo](https://medium.com/@sivadevd01/using-a-private-git-repo-as-a-dependency-in-flutter-7b8429c7c566)
+- Go inside your pubspec.yaml file
+- Add this line under the dependencies:
+```
+flutter_fit_utils_vaistudio:
+    git:
+      url: https://github.com/s0punk/flutter_fit_utils_vaistudio.git
+```
+- Get dependencies
+```
+flutter pub get
+```
 
 ## Usage
 
@@ -29,6 +39,4 @@ const like = 'sample';
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Feel free to [give any feedback](https://github.com/s0punk/flutter_fit_utils_vaistudio/issues) ! This package is also open to contributions.

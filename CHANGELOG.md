@@ -3,3 +3,6 @@
 - Added pre-built configurations
 - Added multiple extensions
 - Added FCM Provider
+- Added Build module
+- Added Subscription module
+- Added Notification service
