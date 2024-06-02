@@ -3,7 +3,15 @@ and more.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This package offers:
+- Extensions for various classes and purposes, such as easier manipulation for dates, durations and strings.
+- A module to easily manage the current build version and compare it to the latest available build.
+- A module to easily manage in-app subscriptions
+- A module to incorporate Firebase messaging with a single line of code.
+- Some pre-made configuration classes:
+    - Developper confiflg
+    - UI config
+- A service to use local notifications.
 
 ## Getting started
 
