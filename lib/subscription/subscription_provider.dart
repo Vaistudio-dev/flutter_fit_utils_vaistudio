@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -42,6 +43,9 @@ class SubscriptionProvider extends ChangeNotifier {
   /// Called when a user successfully restores a previous purchase.
   final Function()? onUserRestorePurchaseSuccessfully;
 
+  /// Execute when a user is trying to access a feature behind the paywall.
+  final Function(BuildContext)? onRestrictedAccess;
+
   /// Creates a new instance of [SubscriptionProvider].
   SubscriptionProvider({
     required this.entitlementId,
@@ -49,6 +53,7 @@ class SubscriptionProvider extends ChangeNotifier {
     required this.googleApiKey,
     this.onUserSubscribedSuccessfully,
     this.onUserRestorePurchaseSuccessfully,
+    this.onRestrictedAccess,
   });
 
   /// Initializes the subscriptions and fetches the current offering.

@@ -13,6 +13,9 @@ export 'subscription/subscription_provider.dart';
 export 'subscription/paywall.dart';
 export 'internet_handler/internet_handler.dart';
 export 'internet_handler/network_alert.dart';
+export 'feature_activation/feature_activation.dart';
+export 'feature_activation/feature_activation_handler.dart';
+export 'feature_activation/features_extension.dart';
 
 /// Initializes the following configs:
 /// - UIConfig
