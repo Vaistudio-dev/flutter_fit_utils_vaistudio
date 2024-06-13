@@ -1,5 +1,6 @@
 library flutter_fit_utils_vaistudio;
 
+import 'app_build_info/build_config.dart';
 import 'config/developer_config.dart';
 import 'config/ui_config.dart';
 
@@ -10,6 +11,8 @@ export 'app_build_info/index.dart';
 export 'notification_service.dart';
 export 'subscription/subscription_provider.dart';
 export 'subscription/paywall.dart';
+export 'internet_handler/internet_handler.dart';
+export 'internet_handler/network_alert.dart';
 
 /// Initializes the following configs:
 /// - UIConfig
@@ -17,4 +20,5 @@ export 'subscription/paywall.dart';
 Future<void> initConfigs() async {
   await uiConfig.initialize();
   devConfig.read();
+  buildConfig.read();
 }

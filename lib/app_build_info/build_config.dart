@@ -42,3 +42,5 @@ class BuildConfig extends RemoteConfig {
     buildProvider.updateBuild(latestBuildInformation!);
   }
 }
+
+final BuildConfig buildConfig = BuildConfig();
