@@ -20,5 +20,6 @@ extension VaiStudioContextxtension on BuildContext {
   SubscriptionProvider get subscriptionProvider => read<SubscriptionProvider>();
 
   /// Access to the subscription provider.
-  SubscriptionProvider get watchSubscriptionProvider => watch<SubscriptionProvider>();
+  SubscriptionProvider get watchSubscriptionProvider =>
+      watch<SubscriptionProvider>();
 }

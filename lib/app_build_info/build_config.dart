@@ -11,6 +11,11 @@ class BuildConfig extends RemoteConfig {
   /// Name of the parameter for the build information.
   static const String versionKey = "build_version";
 
+  /// Name of the parameter for the store url.
+  static const String storeUrlKey = "store_url";
+
+  String storeUrl = "";
+
   String currentAppVersion = "";
   int currentBuild = 0;
 
@@ -20,6 +25,8 @@ class BuildConfig extends RemoteConfig {
   void read() {
     latestBuildInformation = BuildVersion.fromModel(Model.fromJson(
         jsonDecode(appConfig.getString(versionKey)) as Map<String, dynamic>));
+
+    storeUrl = appConfig.getString(storeUrlKey);
   }
 
   /// Reads the current app version on the device and sends the data to the [BuildProvider].
