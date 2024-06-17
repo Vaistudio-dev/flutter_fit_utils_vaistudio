@@ -16,6 +16,7 @@ export 'internet_handler/network_alert.dart';
 export 'feature_activation/feature_activation.dart';
 export 'feature_activation/feature_activation_handler.dart';
 export 'feature_activation/features_extension.dart';
+export 'crashlytics.dart';
 
 /// Initializes the following configs:
 /// - UIConfig
