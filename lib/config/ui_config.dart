@@ -19,12 +19,24 @@ class UIConfig extends RemoteConfig {
 
   @override
   void read() {
-    _appText = Map<String, String>.from(
-        jsonDecode(appConfig.getString(_localeKey)) as Map<dynamic, dynamic>);
-    showAppBar = appConfig.getBool(_showAppBarKey);
-    maxLoadingTries = appConfig.getInt(_loadingTriesKey);
+    final config = appConfig.getAll();
 
-    appFeatures = (jsonDecode(appConfig.getString(_featuresKey)) as List<dynamic>).map((item) => FeatureActivation.fromJson(item as Map<String, dynamic>)).toList();
+    if (config.containsKey(_localeKey)) {
+      _appText = Map<String, String>.from(
+        jsonDecode(appConfig.getString(_localeKey)) as Map<dynamic, dynamic>);
+    }
+    
+    if (config.containsKey(_showAppBarKey)) {
+      showAppBar = appConfig.getBool(_showAppBarKey);
+    }
+    
+    if (config.containsKey(_loadingTriesKey)) {
+      maxLoadingTries = appConfig.getInt(_loadingTriesKey);
+    }
+    
+    if (config.containsKey(_featuresKey)) {
+      appFeatures = (jsonDecode(appConfig.getString(_featuresKey)) as List<dynamic>).map((item) => FeatureActivation.fromJson(item as Map<String, dynamic>)).toList();
+    }
   }
 
   /// Retourne un [String] de [appText].

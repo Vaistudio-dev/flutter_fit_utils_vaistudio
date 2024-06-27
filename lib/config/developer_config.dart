@@ -8,7 +8,11 @@ class DeveloperConfig extends RemoteConfig {
 
   @override
   void read() {
-    _developerList = readStringList(_developerListKey);
+    final config = appConfig.getAll();
+
+    if (config.containsKey(_developerListKey)) {
+      _developerList = readStringList(_developerListKey);
+    }
   }
 
   /// Returns [true] if the current's user email is in the developper list.
