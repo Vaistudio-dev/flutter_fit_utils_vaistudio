@@ -30,6 +30,16 @@ class PasswordValidator extends Modelable with RuleValidator {
   /// Caractéristique requises d'un mot de passe.
   PasswordValidator({this.minChar = 0, this.maxChar = 0, this.needCapital = false, this.needNumber = false, this.needSpecialChar = false, this.currentPassword = "", super.id, super.userId, super.invalid});
 
+  /// Créé une instance depuis un [Model].
+  PasswordValidator.fromModel(super.model) :
+    minChar = int.parse(model.data[_minCharKey].toString()),
+    maxChar = int.parse(model.data[_maxCharKey].toString()),
+    needCapital = model.data[_needCapitalKey].toString().parseBool(),
+    needNumber = model.data[_needNumberKey].toString().parseBool(),
+    needSpecialChar = model.data[_needSpecialCharKey].toString().parseBool(),
+    currentPassword = "",
+    super.fromModel();
+
   @override
   Modelable copyWith({String? id, String? userId, bool? invalid = false, int? minChar, int? maxChar, bool? needCapital, bool? needNumber, bool? needSpecialChar, String? currentPassword}) => PasswordValidator(
     minChar: minChar ?? this.minChar,
