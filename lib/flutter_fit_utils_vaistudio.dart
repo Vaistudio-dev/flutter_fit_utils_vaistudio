@@ -19,6 +19,7 @@ export 'feature_activation/features_extension.dart';
 export 'crashlytics.dart';
 export 'validation.dart';
 export 'checkup.dart';
+export 'password_validator.dart';
 
 /// Initializes the following configs:
 /// - UIConfig
