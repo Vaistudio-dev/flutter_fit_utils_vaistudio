@@ -1,7 +1,7 @@
 name: flutter_fit_utils_vaistudio
 description: "A flutter package that contains pre-built utilities for VaiStudio apps. Ranges from extensions, to configs, to providers
 and more."
-version: 1.0.0
+version: 1.1.0
 repository: https://github.com/s0punk/flutter_fit_utils_vaistudio
 issue_tracker: https://github.com/s0punk/flutter_fit_utils_vaistudio/issues
 
