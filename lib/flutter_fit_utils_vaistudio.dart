@@ -20,6 +20,7 @@ export 'crashlytics.dart';
 export 'validation.dart';
 export 'checkup.dart';
 export 'password_validator.dart';
+export 'shortcut/shortcut_service.dart';
 
 /// Initializes the following configs:
 /// - UIConfig
