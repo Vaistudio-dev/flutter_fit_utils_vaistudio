@@ -21,6 +21,7 @@ export 'validation.dart';
 export 'checkup.dart';
 export 'password_validator.dart';
 export 'shortcut/shortcut_service.dart';
+export 'color_scheme_visualizer.dart';
 
 /// Initializes the following configs:
 /// - UIConfig
