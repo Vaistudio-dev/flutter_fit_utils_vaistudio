@@ -12,6 +12,12 @@ class Paywall extends StatefulWidget {
   /// Liste des avantages à utiliser la version pro,
   final List<String> proFeatures;
 
+  /// Liens vers la privacy policy.
+  final String privacyPolicyLink;
+
+  /// Liens vers les termes et conditions.
+  final String tosLink;
+
   /// Path à fournir pour afficher une image.
   final String? imagePath;
 
@@ -19,6 +25,8 @@ class Paywall extends StatefulWidget {
   const Paywall({
     super.key,
     required this.proFeatures,
+    required this.privacyPolicyLink,
+    required this.tosLink,
     this.skippable = false,
     this.imagePath,
   });
@@ -125,14 +133,14 @@ class _PaywallState extends State<Paywall> {
                       const Text("  •  "),
                       GestureDetector(
                         onTap: () async {
-                          await launchUrl(Uri.parse('https://wayfit.ca/tos.html'));
+                          await launchUrl(Uri.parse(widget.tosLink));
                         },
                         child: FitText.body(getString("terms")),
                       ),
                       const Text("  •  "),
                       GestureDetector(
                         onTap: () async {
-                          await launchUrl(Uri.parse('https://wayfit.ca/privacy_policy.html'));
+                          await launchUrl(Uri.parse(widget.privacyPolicyLink));
                         },
                         child: FitText.body(getString("privacy")),
                       ),
