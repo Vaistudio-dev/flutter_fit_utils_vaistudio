@@ -105,6 +105,7 @@ class _PaywallState extends State<Paywall> {
                             const SizedBox(height: 12),
                             if (context.watchSubscriptionProvider.offering != null)
                               FitRadioCards(
+                                selectedIndex: context.subscriptionProvider.packages.indexWhere((element) => element.value.identifier == selectedPackageIdentifier),
                                 options: [
                                   for (final package in context.watchSubscriptionProvider.packages.map((e) => e.value))
                                     (getString(package.packageType.name), "${getString("full_access_for")}\$${package.getPricePerPeriod()}"),
