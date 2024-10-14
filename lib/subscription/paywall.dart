@@ -54,104 +54,149 @@ class _PaywallState extends State<Paywall> {
     );
   }
 
+  String getSubscribeButtonText() {
+    if (context.subscriptionProvider.packages.firstWhere((element) => element.value.identifier == selectedPackageIdentifier).value.hasFreeTrial()) {
+      return getString("startFreeTrial");
+    }
+
+    return getString("subscribeNow");
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: context.subscriptionProvider.initialize(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return const FitLoadingIndicator();
-        }
+        future: context.subscriptionProvider.initialize(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const FitLoadingIndicator();
+          }
 
-        return Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: widget.skippable,
-          ),
-          body: SafeArea(
-            child: Column(
-              children: [
-                if (widget.imagePath != null)
-                  Image.asset(
-                    widget.imagePath!,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Container(
-                      margin: FitTheme.of(context)?.pageMargin,
-                      child: Column(
-                        children: [
-                          FitText.headline(getString("subscriptionHeadline")),
-                          for (final String feature in widget.proFeatures)
-                            FitTextIcon(
-                              icon: const Icon(Icons.check, size: 18),
-                              text: FitText.body(
-                                getString(feature),
-                                style: const TextStyle(
-                                  fontSize: 18,
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: widget.skippable,
+            ),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        margin: FitTheme.of(context)?.pageMargin,
+                        child: Column(
+                          children: [
+                            if (widget.imagePath != null)
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                child: Image.asset(
+                                  widget.imagePath!,
+                                  width: MediaQuery.of(context).size.width,
                                 ),
                               ),
-                            ),
-                          if (context.watchSubscriptionProvider.offering != null)
-                            for (final package in context.watchSubscriptionProvider.packages.map((e) => e.value))
-                              FitSelectableCard(
-                                title: getString(package.packageType.name),
-                                description: "${getString("full_access_for")}\$${package.getPricePerPeriod()}",
-                                selected: selectedPackageIdentifier == package.identifier,
-                                onTap: () {
+                            FitText.headline(getString("subscriptionHeadline")),
+                            const SizedBox(height: 12),
+                            for (final String feature in widget.proFeatures)
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 8),
+                                child: FitTextIcon(
+                                  icon: Icon(Icons.check, color: Theme.of(context).colorScheme.primary),
+                                  text: FitText.body(getString(feature)),
+                                ),
+                              ),
+                            const SizedBox(height: 12),
+                            if (context.watchSubscriptionProvider.offering != null)
+                              FitRadioCards(
+                                options: [
+                                  for (final package in context.watchSubscriptionProvider.packages.map((e) => e.value))
+                                    (getString(package.packageType.name), "${getString("full_access_for")}\$${package.getPricePerPeriod()}"),
+                                ],
+                                onSelectionChanged: (index) {
                                   setState(() {
-                                    selectedPackageIdentifier = package.identifier;
+                                    selectedPackageIdentifier = context.subscriptionProvider.packages[index].value.identifier;
                                   });
                                 },
                               ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.min,
+                  Column(
                     children: [
-                      GestureDetector(
+                      FitButton(
                         onTap: () async {
-                          final bool result = await context.subscriptionProvider.restorePurchase();
+                          final String result = await context.subscriptionProvider.buySubscription(context.subscriptionProvider.packages.firstWhere((element) => element.value.identifier == selectedPackageIdentifier).value);
 
-                          if (result) {
-                            showMsg(getString("restoreCompleted"));
-                          }
-                          else {
-                            showMsg(getString("errorRestore"));
+                          if (result.isNotEmpty) {
+                            showMsg(getString(result));
                           }
                         },
-                        child: FitText.body(
-                          getString("restore"),
+                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        width: double.infinity,
+                        height: 60,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FitText.button(
+                              getSubscribeButtonText(),
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            if (context.subscriptionProvider.packages.firstWhere((element) => element.value.identifier == selectedPackageIdentifier).value.hasFreeTrial())
+                              FitText.button(
+                                getString("subscription_intro_offer", placeholders: {"PRICE": context.subscriptionProvider.packages.firstWhere((element) => element.value.identifier == selectedPackageIdentifier).value.getPricePerPeriod()}),
+                                textAlign: TextAlign.center,
+                              ),
+                          ],
                         ),
                       ),
-                      const Text("  •  "),
-                      GestureDetector(
-                        onTap: () async {
-                          await launchUrl(Uri.parse(widget.tosLink));
-                        },
-                        child: FitText.body(getString("terms")),
-                      ),
-                      const Text("  •  "),
-                      GestureDetector(
-                        onTap: () async {
-                          await launchUrl(Uri.parse(widget.privacyPolicyLink));
-                        },
-                        child: FitText.body(getString("privacy")),
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                final bool result = await context.subscriptionProvider.restorePurchase();
+
+                                if (result) {
+                                  showMsg(getString("restoreCompleted"));
+                                }
+                                else {
+                                  showMsg(getString("errorRestore"));
+                                }
+                              },
+                              child: FitText.body(
+                                getString("restore"),
+                              ),
+                            ),
+                            const Text("  •  "),
+                            GestureDetector(
+                              onTap: () async {
+                                await launchUrl(Uri.parse(widget.tosLink));
+                              },
+                              child: FitText.body(getString("terms")),
+                            ),
+                            const Text("  •  "),
+                            GestureDetector(
+                              onTap: () async {
+                                await launchUrl(Uri.parse(widget.privacyPolicyLink));
+                              },
+                              child: FitText.body(getString("privacy")),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      }
+          );
+        }
     );
   }
 }
