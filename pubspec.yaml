@@ -36,7 +36,7 @@ dependencies:
   connectivity_plus: ^6.0.3
   lottie: ^3.1.2
   flutter_native_splash: ^2.4.0
-  firebase_crashlytics: ^3.5.7
+  firebase_crashlytics: ^3.0.16
   quick_actions: ^1.0.7
   adaptive_dialog: ^2.1.0
 
