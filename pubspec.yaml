@@ -1,7 +1,7 @@
 name: flutter_fit_utils_vaistudio
 description: "A flutter package that contains pre-built utilities for VaiStudio apps. Ranges from extensions, to configs, to providers
 and more."
-version: ^2.4.2
+version: 1.2.0
 repository: https://github.com/s0punk/flutter_fit_utils_vaistudio
 issue_tracker: https://github.com/s0punk/flutter_fit_utils_vaistudio/issues
 
@@ -22,8 +22,8 @@ dependencies:
   firebase_messaging: ^15.2.1
   flutter:
     sdk: flutter
-  flutter_fit_utils: ^2.4.2
-  flutter_fit_utils_config: ^1.0.1
+  flutter_fit_utils: ^2.4.3
+  flutter_fit_utils_config: ^1.0.2
   flutter_local_notifications: ^18.0.1
   timezone: ^0.10.0
   intl: ^0.20.2

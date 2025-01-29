@@ -15,10 +15,7 @@ class NotificationService {
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings("ic_notification");
     final DarwinInitializationSettings iosSettings =
-        DarwinInitializationSettings(
-      onDidReceiveLocalNotification:
-          (int id, String? title, String? body, String? payload) async {},
-    );
+        DarwinInitializationSettings();
 
     final InitializationSettings initializationSettings =
         InitializationSettings(android: androidSettings, iOS: iosSettings);
@@ -44,10 +41,7 @@ class NotificationService {
               MacOSFlutterLocalNotificationsPlugin>()
           ?.requestPermissions(alert: true, badge: true, sound: true);
     } else {
-      return notifications
-          .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
-          ?.requestPermission();
+      return notifications.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
     }
   }
 
