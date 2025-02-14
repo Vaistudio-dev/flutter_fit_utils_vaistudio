@@ -42,7 +42,11 @@ extension VaiStudioDurationUtils on Duration {
   }
 
   /// Creates a [Duration] from a string.
-  static Duration fromString(String s) {
+  static Duration fromString(String? s) {
+    if (s == null) {
+      return const Duration();
+    }
+
     int hours = 0;
     int minutes = 0;
     int micros;
