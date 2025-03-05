@@ -41,7 +41,7 @@ class PasswordValidator extends Modelable with RuleValidator {
     super.fromModel();
 
   @override
-  Modelable copyWith({String? id, String? userId, bool? invalid = false, int? minChar, int? maxChar, bool? needCapital, bool? needNumber, bool? needSpecialChar, String? currentPassword}) => PasswordValidator(
+  PasswordValidator copyWith({String? id, String? userId, bool? invalid = false, int? minChar, int? maxChar, bool? needCapital, bool? needNumber, bool? needSpecialChar, String? currentPassword}) => PasswordValidator(
     minChar: minChar ?? this.minChar,
     maxChar: maxChar ?? this.maxChar,
     needCapital: needCapital ?? this.needCapital,
