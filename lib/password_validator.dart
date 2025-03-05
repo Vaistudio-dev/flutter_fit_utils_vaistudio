@@ -65,7 +65,7 @@ class PasswordValidator extends Modelable with RuleValidator {
 
   @override
   Map<String, bool> validate() => {
-    getString("passwordRange", placeholders: {"MIN_CHAR": minChar.toString(), "MAX_CHAR": maxChar.toString()}): currentPassword.length >= minChar && currentPassword.length <= maxChar,
+    getString("passwordRange", placeholders: {"MIN": minChar.toString(), "MAX": maxChar.toString()}): currentPassword.length >= minChar && currentPassword.length <= maxChar,
     if (needCapital)
       getString("passwordCapital"): currentPassword.containsCapitalLetter(),
     if (needNumber)
