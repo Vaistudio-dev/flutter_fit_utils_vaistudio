@@ -14,32 +14,44 @@ class NetworkAlert extends StatelessWidget {
   /// Message of the error.
   final String message;
 
+  final TextDirection textDirection;
+
+  final ThemeData? themeData;
+
   /// Creates a new [NetworkAlert].
   const NetworkAlert({
     super.key,
     this.title = _defaultTitle,
     this.message = _defaultMessage,
+    this.textDirection = TextDirection.ltr,
+    this.themeData,
   });
 
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset("assets/wifi.json"),
-            FitText.headline(title, padding: const EdgeInsets.only(bottom: 6)),
-            FitText.body(
-              message,
-              textAlign: TextAlign.center,
-              margin: const EdgeInsets.only(left: 10, right: 10),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
+    return Directionality(
+      textDirection: textDirection,
+      child: Theme(
+        data: themeData ?? ThemeData(),
+        child: Scaffold(
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Lottie.asset("assets/wifi.json"),
+                FitText.headline(title, padding: const EdgeInsets.only(bottom: 6)),
+                FitText.body(
+                  message,
+                  textAlign: TextAlign.center,
+                  margin: const EdgeInsets.only(left: 10, right: 10),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
