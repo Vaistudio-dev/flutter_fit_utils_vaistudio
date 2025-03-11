@@ -45,9 +45,6 @@ class NetworkAlert extends StatelessWidget {
                   message,
                   textAlign: TextAlign.center,
                   margin: const EdgeInsets.only(left: 10, right: 10),
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
                 ),
               ],
             ),
