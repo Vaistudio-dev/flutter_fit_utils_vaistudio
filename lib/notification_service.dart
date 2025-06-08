@@ -115,8 +115,6 @@ class NotificationService {
       TZDateTime.from(scheduledDate, local),
       notificationDetails ?? getBasicNotificationDetails(),
       payload: payload,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       matchDateTimeComponents: showEveryDay ? DateTimeComponents.time : null,
     );
